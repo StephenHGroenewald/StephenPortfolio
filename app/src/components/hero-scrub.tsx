@@ -169,33 +169,7 @@ export function HeroScrub({ variant = "v2" }: { variant?: HeroVariant }) {
       />
 
       <div ref={chromeRef} className="relative z-10 flex h-full min-h-dvh flex-col justify-end px-6 pb-20 md:px-10 md:pb-28">
-        <span
-          data-reveal
-          ref={frameTagRef}
-          className="absolute top-6 right-6 text-[11px] tracking-[0.15em] md:top-8 md:right-10"
-          style={{ fontFamily: "var(--font-mono)", color: "var(--brand-ink-dim)" }}
-        >
-          FRAME 001/100
-        </span>
-
-        <span
-          data-reveal
-          className="absolute top-12 right-6 flex gap-2 text-[11px] tracking-[0.15em] md:top-14 md:right-10"
-          style={{ fontFamily: "var(--font-mono)" }}
-        >
-          <a
-            href="/v1"
-            style={{ color: variant === "v1" ? "var(--brand-accent)" : "var(--brand-ink-dim)" }}
-          >
-            [HERO V1]
-          </a>
-          <a
-            href="/v2"
-            style={{ color: variant === "v2" ? "var(--brand-accent)" : "var(--brand-ink-dim)" }}
-          >
-            [HERO V2]
-          </a>
-        </span>
+        <span ref={frameTagRef} className="hidden" aria-hidden="true" />
 
         <h1
           data-reveal
