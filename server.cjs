@@ -1,19 +1,27 @@
-async function start() {
-  try {
-    const { serve } = await import('@hono/node-server');
-    const app = await import('./dist/server/server.js');
+const { serve } = require('@hono/node-server');
 
-    const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
-    serve({
-      fetch: app.default.fetch,
-      port: Number(port)
-    });
+let fetchHandler = null;
 
-    console.log(`Node server listening on port ${port}`);
-  } catch (err) {
-    console.error("Error starting server:", err);
-  }
-}
+// Start loading the app immediately but don't wait for it before listening
+import('./dist/server/server.js')
+  .then(module => {
+    fetchHandler = module.default.fetch;
+    console.log("App loaded successfully");
+  })
+  .catch(err => {
+    console.error("Failed to load app", err);
+  });
 
-start();
+serve({
+  fetch: async (request, env, ctx) => {
+    if (!fetchHandler) {
+      return new Response('Server is starting up, please try again in a moment.', { status: 503 });
+    }
+    return fetchHandler(request, env, ctx);
+  },
+  port: Number(port)
+});
+
+console.log(`Node server listening on port ${port}`);
