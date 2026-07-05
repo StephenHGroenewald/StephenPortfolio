@@ -135,8 +135,11 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           This page didn&apos;t load
         </h1>
         <p className="mt-2" style={{ color: "var(--brand-ink-dim)" }}>
-          Something went wrong on our end. You can try refreshing or head back home.
+          {error.message}
         </p>
+        <pre className="mt-4 max-h-64 overflow-auto text-left text-xs bg-red-950/30 text-red-200 p-4 rounded border border-red-900/50">
+          {error.stack}
+        </pre>
         <div className="mt-4 flex flex-wrap justify-center gap-2">
           <button
             onClick={() => {
