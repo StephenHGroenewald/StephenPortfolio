@@ -18,7 +18,7 @@ export function Contact() {
       </p>
 
       <a
-        href="mailto:aiautomateme@gmail.com"
+        href="mailto:stephen@stephengroenewald.com"
         className="mt-10 -rotate-2 rounded-full px-8 py-4 text-sm font-medium tracking-[0.1em] uppercase transition-transform duration-200 hover:rotate-0 hover:scale-105 active:scale-95 active:skew-x-1"
         style={{
           fontFamily: "var(--font-mono)",
