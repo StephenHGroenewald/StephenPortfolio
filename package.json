@@ -27,6 +27,7 @@
     "@higgsfield/fnf": "workspace:*",
     "@higgsfield/fnf-react": "workspace:*",
     "@higgsfield/quanta": "workspace:*",
+    "@hono/node-server": "^2.0.8",
     "@hookform/resolvers": "^5.2.2",
     "@material-symbols/svg-400": "^0.45.5",
     "@radix-ui/react-accordion": "^1.2.12",
