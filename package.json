@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "dev": "vite dev",
+    "start": "node server.cjs",
     "dev:design": "HF_DESIGN_INSPECTOR=1 vite dev --mode design",
     "build": "tsc --noEmit && vite build",
     "build:design": "tsc --noEmit && HF_DESIGN_INSPECTOR=1 vite build --mode design",
