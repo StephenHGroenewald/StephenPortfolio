@@ -5,9 +5,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const FRAME_COUNT = 100;
-const framePath = (i: number) => `/frames/hero/frame_${String(i + 1).padStart(3, "0")}.jpg`;
 
-export function HeroScrub() {
+export type HeroVariant = "v1" | "v2";
+
+export function HeroScrub({ variant = "v2" }: { variant?: HeroVariant }) {
+  const framePath = (i: number) =>
+    `/frames/hero-${variant}/frame_${String(i + 1).padStart(3, "0")}.jpg`;
   const containerRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const chromeRef = useRef<HTMLDivElement | null>(null);
@@ -150,7 +153,7 @@ export function HeroScrub() {
       {/* Static poster: correct on first paint (SSR + before JS), and
           identical to the canvas's first drawn frame, so there is no flash. */}
       <img
-        src="/assets/hero-poster.jpg"
+        src={`/assets/hero-poster-${variant}.jpg`}
         alt="Stephen Groenewald, portrait still"
         className="absolute inset-0 h-full w-full object-cover"
       />
@@ -173,6 +176,25 @@ export function HeroScrub() {
           style={{ fontFamily: "var(--font-mono)", color: "var(--brand-ink-dim)" }}
         >
           FRAME 001/100
+        </span>
+
+        <span
+          data-reveal
+          className="absolute top-12 right-6 flex gap-2 text-[11px] tracking-[0.15em] md:top-14 md:right-10"
+          style={{ fontFamily: "var(--font-mono)" }}
+        >
+          <a
+            href="/v1"
+            style={{ color: variant === "v1" ? "var(--brand-accent)" : "var(--brand-ink-dim)" }}
+          >
+            [HERO V1]
+          </a>
+          <a
+            href="/v2"
+            style={{ color: variant === "v2" ? "var(--brand-accent)" : "var(--brand-ink-dim)" }}
+          >
+            [HERO V2]
+          </a>
         </span>
 
         <h1

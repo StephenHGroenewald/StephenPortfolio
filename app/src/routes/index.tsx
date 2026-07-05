@@ -1,27 +1,30 @@
+import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { SmoothScroll } from "../components/smooth-scroll";
-import { Nav } from "../components/nav";
-import { HeroScrub } from "../components/hero-scrub";
-import { CareerHistory } from "../components/career-history";
-import { Projects } from "../components/projects";
-import { Interests } from "../components/interests";
-import { Contact } from "../components/contact";
+import { PortfolioPage } from "../components/portfolio-page";
+import type { HeroVariant } from "../components/hero-scrub";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
+function hashVariant(): HeroVariant | null {
+  if (typeof window === "undefined") return null;
+  const hash = window.location.hash.replace("#", "");
+  return hash === "v1" || hash === "v2" ? hash : null;
+}
+
 function Index() {
-  return (
-    <SmoothScroll>
-      <Nav />
-      <main>
-        <HeroScrub />
-        <CareerHistory />
-        <Projects />
-        <Interests />
-        <Contact />
-      </main>
-    </SmoothScroll>
-  );
+  const [variant, setVariant] = useState<HeroVariant>("v2");
+
+  useEffect(() => {
+    const apply = () => {
+      const fromHash = hashVariant();
+      if (fromHash) setVariant(fromHash);
+    };
+    apply();
+    window.addEventListener("hashchange", apply);
+    return () => window.removeEventListener("hashchange", apply);
+  }, []);
+
+  return <PortfolioPage variant={variant} />;
 }
