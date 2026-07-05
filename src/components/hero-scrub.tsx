@@ -10,7 +10,7 @@ export type HeroVariant = "v1" | "v2";
 
 export function HeroScrub({ variant = "v2" }: { variant?: HeroVariant }) {
   const framePath = (i: number) =>
-    `/frames/hero-${variant}/frame_${String(i + 1).padStart(3, "0")}.jpg`;
+    `/frames/hero-${variant}/frame_${String(i + 1).padStart(3, "0")}.jpg?v=2`;
   const containerRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const chromeRef = useRef<HTMLDivElement | null>(null);
@@ -153,7 +153,7 @@ export function HeroScrub({ variant = "v2" }: { variant?: HeroVariant }) {
       {/* Static poster: correct on first paint (SSR + before JS), and
           identical to the canvas's first drawn frame, so there is no flash. */}
       <img
-        src={`/assets/hero-poster-${variant}.jpg`}
+        src={`/assets/hero-poster-${variant}.jpg?v=2`}
         alt="Stephen Groenewald, portrait still"
         className="absolute inset-0 h-full w-full object-cover"
       />
