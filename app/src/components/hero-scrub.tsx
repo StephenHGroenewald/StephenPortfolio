@@ -1,0 +1,195 @@
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const FRAME_COUNT = 100;
+const framePath = (i: number) => `/frames/hero/frame_${String(i + 1).padStart(3, "0")}.jpg`;
+
+export function HeroScrub() {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const chromeRef = useRef<HTMLDivElement | null>(null);
+  const frameTagRef = useRef<HTMLSpanElement | null>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const images: (HTMLImageElement | null)[] = new Array(FRAME_COUNT).fill(null);
+    let currentIndex = 0;
+
+    function resizeCanvas() {
+      if (!canvas || !container) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = container.clientWidth * dpr;
+      canvas.height = container.clientHeight * dpr;
+      drawFrame(currentIndex);
+    }
+
+    function drawFrame(index: number) {
+      if (!ctx || !canvas) return;
+      // Fall back to the nearest already-loaded frame while others stream in.
+      let useIndex = index;
+      if (!images[useIndex]) {
+        let offset = 1;
+        while (offset < FRAME_COUNT) {
+          if (images[index - offset]) {
+            useIndex = index - offset;
+            break;
+          }
+          if (images[index + offset]) {
+            useIndex = index + offset;
+            break;
+          }
+          offset += 1;
+        }
+      }
+      const img = images[useIndex];
+      if (!img) return;
+
+      const canvasRatio = canvas.width / canvas.height;
+      const imgRatio = img.naturalWidth / img.naturalHeight;
+      let drawWidth = canvas.width;
+      let drawHeight = canvas.height;
+      let offsetX = 0;
+      let offsetY = 0;
+
+      if (imgRatio > canvasRatio) {
+        drawHeight = canvas.height;
+        drawWidth = drawHeight * imgRatio;
+        offsetX = (canvas.width - drawWidth) / 2;
+      } else {
+        drawWidth = canvas.width;
+        drawHeight = drawWidth / imgRatio;
+        offsetY = (canvas.height - drawHeight) / 2;
+      }
+      ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+    }
+
+    function loadFrame(i: number, onDone?: () => void) {
+      if (images[i]) {
+        onDone?.();
+        return;
+      }
+      const img = new Image();
+      img.decoding = "async";
+      img.onload = () => {
+        images[i] = img;
+        if (i === currentIndex) drawFrame(currentIndex);
+        onDone?.();
+      };
+      img.src = framePath(i);
+    }
+
+    // First frame loads and paints immediately (screenshot-safe initial state).
+    loadFrame(0, () => resizeCanvas());
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reducedMotion) {
+      // Static fallback: the composed final frame, no pin, no scrub.
+      currentIndex = FRAME_COUNT - 1;
+      loadFrame(currentIndex, () => resizeCanvas());
+      if (frameTagRef.current) {
+        frameTagRef.current.textContent = `FRAME ${FRAME_COUNT}/${FRAME_COUNT}`;
+      }
+      window.addEventListener("resize", resizeCanvas);
+      return () => window.removeEventListener("resize", resizeCanvas);
+    }
+
+    // Stream the rest of the sequence in the background.
+    for (let i = 1; i < FRAME_COUNT; i += 1) loadFrame(i);
+
+    window.addEventListener("resize", resizeCanvas);
+
+    const isMobile = window.innerWidth < 768;
+    const scrollDistance = isMobile ? window.innerHeight * 1.1 : window.innerHeight * 1.9;
+
+    const st = ScrollTrigger.create({
+      trigger: container,
+      start: "top top",
+      end: `+=${scrollDistance}`,
+      pin: true,
+      pinSpacing: false,
+      scrub: 0.5,
+      onUpdate: (self) => {
+        currentIndex = Math.round(self.progress * (FRAME_COUNT - 1));
+        drawFrame(currentIndex);
+        if (frameTagRef.current) {
+          frameTagRef.current.textContent = `FRAME ${String(currentIndex + 1).padStart(3, "0")}/${FRAME_COUNT}`;
+        }
+      },
+    });
+
+    const tl = gsap.timeline({ delay: 0.15 });
+    tl.fromTo(
+      chromeRef.current?.querySelectorAll("[data-reveal]") ?? [],
+      { y: 24, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.08 },
+    );
+
+    return () => {
+      st.kill();
+      window.removeEventListener("resize", resizeCanvas);
+    };
+  }, []);
+
+  return (
+    <section
+      id="top"
+      ref={containerRef}
+      className="relative min-h-dvh overflow-hidden"
+      style={{ backgroundColor: "var(--brand-bg)" }}
+    >
+      {/* Static poster: correct on first paint (SSR + before JS), and
+          identical to the canvas's first drawn frame, so there is no flash. */}
+      <img
+        src="/assets/hero-poster.jpg"
+        alt="Portrait still, dossier hero"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
+
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(11,9,6,0.55) 0%, rgba(11,9,6,0.05) 30%, rgba(11,9,6,0.15) 70%, rgba(11,9,6,0.85) 100%)",
+        }}
+      />
+
+      <div ref={chromeRef} className="relative z-10 flex h-full min-h-dvh flex-col justify-end px-6 pb-20 md:px-10 md:pb-28">
+        <span
+          data-reveal
+          ref={frameTagRef}
+          className="absolute top-6 right-6 text-[11px] tracking-[0.15em] md:top-8 md:right-10"
+          style={{ fontFamily: "var(--font-mono)", color: "var(--brand-ink-dim)" }}
+        >
+          FRAME 001/100
+        </span>
+
+        <h1
+          data-reveal
+          className="max-w-[90vw] text-[15vw] leading-[0.85] tracking-tighter uppercase md:max-w-[70vw] md:text-[7rem]"
+          style={{ fontFamily: "var(--font-display)", color: "var(--brand-ink)" }}
+        >
+          Your Name
+        </h1>
+        <p
+          data-reveal
+          className="mt-4 max-w-md text-base md:text-lg"
+          style={{ color: "var(--brand-ink-dim)" }}
+        >
+          Add your one-line tagline here: what you do and who you do it for.
+        </p>
+      </div>
+    </section>
+  );
+}

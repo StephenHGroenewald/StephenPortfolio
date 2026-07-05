@@ -8,8 +8,6 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
-import { button } from "@higgsfield/quanta/button";
-import { NotFound } from "@higgsfield/quanta/not-found";
 
 import appCss from "../styles.css?url";
 import { reportHiggsfieldError } from "../lib/higgsfield-error-reporting";
@@ -102,17 +100,22 @@ function buildHead(meta: AppMeta) {
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-dvh items-center justify-center bg-q-background-primary px-4">
-      <NotFound
-        className="mx-auto max-w-md"
-        icon={<span className="text-q-title-md-semi-bold text-q-text-primary">404</span>}
-        title="Page not found"
-        subtitle="The page you're looking for doesn't exist or has been moved."
+    <div
+      className="flex min-h-dvh flex-col items-center justify-center gap-4 px-4 text-center"
+      style={{ backgroundColor: "var(--brand-bg)", color: "var(--brand-ink)" }}
+    >
+      <span style={{ fontFamily: "var(--font-mono)", color: "var(--brand-accent)" }}>404</span>
+      <h1 style={{ fontFamily: "var(--font-display)", fontSize: "2.5rem" }}>Page not found</h1>
+      <p style={{ color: "var(--brand-ink-dim)" }}>
+        The page you&apos;re looking for doesn&apos;t exist or has been moved.
+      </p>
+      <Link
+        to="/"
+        className="mt-2 rounded-full px-6 py-3 text-sm font-medium"
+        style={{ backgroundColor: "var(--brand-accent)", color: "var(--brand-bg)" }}
       >
-        <Link to="/" className={button({ variant: "primary", size: "md" }, "mt-3")}>
-          Go home
-        </Link>
-      </NotFound>
+        Go home
+      </Link>
     </div>
   );
 }
@@ -125,10 +128,15 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   }, [error]);
 
   return (
-    <div className="flex min-h-dvh items-center justify-center bg-q-background-primary px-4">
+    <div
+      className="flex min-h-dvh items-center justify-center px-4"
+      style={{ backgroundColor: "var(--brand-bg)", color: "var(--brand-ink)" }}
+    >
       <div className="max-w-md text-center">
-        <h1 className="text-q-title-lg-semi-bold text-q-text-primary">This page didn't load</h1>
-        <p className="mt-2 text-q-body-sm-regular text-q-text-secondary">
+        <h1 style={{ fontFamily: "var(--font-display)", fontSize: "2rem" }}>
+          This page didn&apos;t load
+        </h1>
+        <p className="mt-2" style={{ color: "var(--brand-ink-dim)" }}>
           Something went wrong on our end. You can try refreshing or head back home.
         </p>
         <div className="mt-4 flex flex-wrap justify-center gap-2">
@@ -137,11 +145,16 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className={button({ variant: "primary", size: "md" })}
+            className="rounded-full px-6 py-3 text-sm font-medium"
+            style={{ backgroundColor: "var(--brand-accent)", color: "var(--brand-bg)" }}
           >
             Try again
           </button>
-          <a href="/" className={button({ variant: "outline", size: "md" })}>
+          <a
+            href="/"
+            className="rounded-full border px-6 py-3 text-sm font-medium"
+            style={{ borderColor: "var(--brand-hairline)", color: "var(--brand-ink)" }}
+          >
             Go home
           </a>
         </div>
@@ -168,7 +181,10 @@ function RootShell({ children }: { children: ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body className="bg-q-background-primary text-q-text-primary">
+      <body style={{ backgroundColor: "#0b0906", color: "#f3ede2" }}>
+        {/* Brand colors are also declared as CSS custom properties in
+            styles.css; the inline fallback here avoids a flash of the
+            Quanta-scaffold background before that stylesheet paints. */}
         {children}
         <Scripts />
       </body>

@@ -106,3 +106,29 @@
     border-color: var(--hf-color-border-default);
   }
 }
+
+/* -----------------------------------------------------------------------
+ * Brand layer (this website's own design system, independent of Quanta).
+ * Locked palette + type per app/design-brief.md. Every custom component
+ * uses these tokens; never the hf-color-*/q-* utilities above.
+ * --------------------------------------------------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap");
+
+:root {
+  --brand-bg: #0b0906;
+  --brand-bg-raised: #171310;
+  --brand-ink: #f3ede2;
+  --brand-ink-dim: #b8ada0;
+  --brand-accent: #e8792a;
+  --brand-accent-press: #c25a1f;
+  --brand-hairline: #3a2f26;
+  --font-display: "Anton", "Arial Narrow", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-body: "Inter Tight", "Inter", sans-serif;
+}
+
+html[data-theme="default-dark"] body {
+  background-color: var(--brand-bg);
+  color: var(--brand-ink);
+  font-family: var(--font-body);
+}
