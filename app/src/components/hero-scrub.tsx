@@ -151,7 +151,7 @@ export function HeroScrub() {
           identical to the canvas's first drawn frame, so there is no flash. */}
       <img
         src="/assets/hero-poster.jpg"
-        alt="Portrait still, dossier hero"
+        alt="Stephen Groenewald, portrait still"
         className="absolute inset-0 h-full w-full object-cover"
       />
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
@@ -180,14 +180,15 @@ export function HeroScrub() {
           className="max-w-[90vw] text-[15vw] leading-[0.85] tracking-tighter uppercase md:max-w-[70vw] md:text-[7rem]"
           style={{ fontFamily: "var(--font-display)", color: "var(--brand-ink)" }}
         >
-          Your Name
+          Stephen Groenewald
         </h1>
         <p
           data-reveal
           className="mt-4 max-w-md text-base md:text-lg"
           style={{ color: "var(--brand-ink-dim)" }}
         >
-          Add your one-line tagline here: what you do and who you do it for.
+          GTM enablement and partnerships leader. 25+ years bridging technical
+          architecture and commercial strategy in global FinTech.
         </p>
       </div>
     </section>

@@ -132,3 +132,9 @@ html[data-theme="default-dark"] body {
   color: var(--brand-ink);
   font-family: var(--font-body);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-video {
+    display: none;
+  }
+}

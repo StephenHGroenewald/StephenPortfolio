@@ -1,20 +1,41 @@
 const INTERESTS = [
-  { label: "Photography", icon: "camera" },
-  { label: "Hiking", icon: "hiking" },
-  { label: "Coffee", icon: "coffee" },
-  { label: "Music", icon: "music" },
-  { label: "Film & TV", icon: "play" },
-  { label: "Side projects", icon: "terminal" },
+  "Golf",
+  "Flying",
+  "Prototyping",
+  "YouTubing",
+  "Reading & learning",
+  "Adrenaline sports",
 ];
 
 export function Interests() {
   return (
     <section
       id="interests"
-      className="relative px-6 py-24 md:px-10 md:py-32"
+      className="relative overflow-hidden px-6 py-24 md:px-10 md:py-32"
       style={{ backgroundColor: "var(--brand-bg)" }}
     >
-      <div className="mx-auto max-w-3xl text-center">
+      <video
+        className="ambient-video absolute inset-0 h-full w-full object-cover opacity-45"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        poster="/assets/videos/interests-loop-poster.jpg"
+        aria-hidden="true"
+      >
+        <source src="/assets/videos/interests-loop.mp4" type="video/mp4" />
+      </video>
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(11,9,6,0.94) 0%, rgba(11,9,6,0.45) 40%, rgba(11,9,6,0.45) 70%, rgba(11,9,6,0.95) 100%)",
+        }}
+      />
+
+      <div className="relative mx-auto max-w-3xl text-center">
         <span
           className="mb-4 block text-[11px] tracking-[0.2em] uppercase"
           style={{ fontFamily: "var(--font-mono)", color: "var(--brand-accent)" }}
@@ -28,25 +49,29 @@ export function Interests() {
           Interests
         </h2>
         <p className="mx-auto mt-4 max-w-md text-sm md:text-base" style={{ color: "var(--brand-ink-dim)" }}>
-          Swap these for the things you actually spend your weekends on.
+          Off the clock: making things, chasing adrenaline, and giving time to
+          AI champions, church groups, and mentorship.
         </p>
       </div>
 
-      <div className="mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
+      <div className="relative mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
         {INTERESTS.map((interest, i) => (
           <div
-            key={interest.label}
-            className={`flex flex-col items-center justify-center gap-3 rounded-sm border px-4 py-10 text-center ${
+            key={interest}
+            className={`flex items-center justify-center rounded-sm border px-4 py-10 text-center ${
               i % 2 === 1 ? "md:translate-y-6" : ""
             }`}
-            style={{ backgroundColor: "var(--brand-bg-raised)", borderColor: "var(--brand-hairline)" }}
+            style={{
+              backgroundColor: "rgba(23,19,16,0.72)",
+              borderColor: "var(--brand-hairline)",
+              backdropFilter: "blur(2px)",
+            }}
           >
-            <img src={`/assets/icons/${interest.icon}.png`} alt="" aria-hidden="true" className="h-9 w-9" />
             <span
-              className="text-xs tracking-[0.1em] uppercase"
+              className="text-xs tracking-[0.1em] uppercase md:text-sm"
               style={{ fontFamily: "var(--font-mono)", color: "var(--brand-ink)" }}
             >
-              {interest.label}
+              {interest}
             </span>
           </div>
         ))}

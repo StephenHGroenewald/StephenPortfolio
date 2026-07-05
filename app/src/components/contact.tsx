@@ -34,7 +34,7 @@ export function Contact() {
         className="mt-24 flex w-full max-w-4xl flex-col items-center justify-between gap-3 border-t pt-6 text-[11px] tracking-[0.15em] uppercase md:flex-row"
         style={{ borderColor: "var(--brand-hairline)", fontFamily: "var(--font-mono)", color: "var(--brand-ink-dim)" }}
       >
-        <span>© 2026 Your Name</span>
+        <span>© 2026 Stephen Groenewald</span>
         <span>Folio 04 / End</span>
       </div>
     </footer>
