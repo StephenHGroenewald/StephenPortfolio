@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap");
 @import "tailwindcss" source(none);
 @source "../src";
 @source "../packages/quanta/src";
@@ -110,9 +111,8 @@
 /* -----------------------------------------------------------------------
  * Brand layer (this website's own design system, independent of Quanta).
  * Locked palette + type per app/design-brief.md. Every custom component
- * uses these tokens; never the hf-color-*/q-* utilities above.
+ * uses these tokens; never the hf-color-* / q-* utilities above.
  * --------------------------------------------------------------------- */
-@import url("https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap");
 
 :root {
   --brand-bg: #0b0906;
