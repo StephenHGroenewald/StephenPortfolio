@@ -116,7 +116,7 @@ export function HeroScrub() {
       start: "top top",
       end: `+=${scrollDistance}`,
       pin: true,
-      pinSpacing: false,
+      pinSpacing: true,
       scrub: 0.5,
       onUpdate: (self) => {
         currentIndex = Math.round(self.progress * (FRAME_COUNT - 1));
