@@ -206,6 +206,15 @@ export function InterestsCarousel() {
         onPointerCancel={endDrag}
       >
         <div className="carousel-tilt">
+          <div className="carousel-center-disc">
+            <span>
+              Click
+              <br />
+              image for
+              <br />
+              info
+            </span>
+          </div>
           <div ref={ringRef} className="carousel-ring">
             {SLIDES.map((slide, i) => (
               <figure
