@@ -350,6 +350,17 @@ html[data-theme="default-dark"] body {
   color: var(--brand-ink);
 }
 
+.carousel-lightbox-text a {
+  color: var(--brand-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 150ms ease;
+}
+
+.carousel-lightbox-text a:hover {
+  color: var(--brand-ink);
+}
+
 .carousel-lightbox-close {
   position: absolute;
   top: 10px;
