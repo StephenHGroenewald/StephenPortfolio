@@ -1,0 +1,1 @@
+Traveling to Spain and riding jet skis along its beautiful, sunny coastlines is the perfect adventure. Skimming across the turquoise Mediterranean water with a historic port or sailboat in the background combines the thrill of speed with the joy of exploring new cultures and warm destinations.

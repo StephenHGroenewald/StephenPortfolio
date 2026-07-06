@@ -1,0 +1,1 @@
+Serving as an Air Force fireman is a profession and calling that I am deeply passionate about. The combination of intense physical preparation, quick tactical decision-making, and the opportunity to protect lives and aircraft under pressure brings a profound sense of duty, camaraderie, and adrenaline-fueled purpose.

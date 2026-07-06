@@ -1,0 +1,1 @@
+Visiting historic European cities like Heidelberg and relaxing at charming outdoor cafes is a travel experience I love. Sitting under a red umbrella, sipping a drink, and taking in the historic brick walls, green trees, and relaxed European atmosphere is the perfect way to soak in local culture.

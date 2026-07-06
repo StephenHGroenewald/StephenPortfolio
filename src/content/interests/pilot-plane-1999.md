@@ -1,0 +1,1 @@
+Flying airplanes is one of the most liberating and exhilarating activities I have ever experienced. Being up in the clouds, taking control of the aircraft, and navigating the open skies offers a unique perspective on the world and a thrilling sense of freedom that only aviation can provide.

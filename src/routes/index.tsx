@@ -14,12 +14,16 @@ function hashVariant(): HeroVariant | null {
 }
 
 function Index() {
-  const [variant, setVariant] = useState<HeroVariant>("v2");
+  const [variant, setVariant] = useState<HeroVariant>("v1");
 
   useEffect(() => {
     const apply = () => {
       const fromHash = hashVariant();
-      if (fromHash) setVariant(fromHash);
+      if (fromHash) {
+        setVariant(fromHash);
+      } else {
+        window.location.replace("#v1");
+      }
     };
     apply();
     window.addEventListener("hashchange", apply);

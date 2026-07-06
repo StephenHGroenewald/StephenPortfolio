@@ -1,0 +1,1 @@
+Golf is an activity I truly love for its perfect blend of precision, mental focus, and relaxing outdoor environments. Spending a day on a beautiful, green fairway, working on my swing, and enjoying friendly competition is the ideal way to unwind while challenging myself to improve with every hole.

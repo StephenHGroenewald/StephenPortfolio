@@ -1,0 +1,1 @@
+Ziplining through the misty, dramatic landscapes of Iceland is an unforgettable way to experience the country's rugged beauty. Feeling the rush of wind and flying high above valleys and rivers while geared up for adventure is the ultimate way to explore Iceland's unique outdoors.

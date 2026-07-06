@@ -1,0 +1,1 @@
+Traveling through the dramatic landscapes of Iceland is an adventure I will never forget. Exploring its massive waterfalls, walking along black sand beaches, and feeling the raw, misty power of nature up close makes it one of my favorite destinations for photography and discovering the great outdoors.

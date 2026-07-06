@@ -9,29 +9,23 @@ const IMAGES = import.meta.glob("../assets/carousel/*.{jpg,jpeg,png}", {
   import: "default",
 }) as Record<string, string>;
 
-// Preferred display order by slug (keeps topics from clustering); optional.
-const ORDER = [
-  "sky-diving", "africa-elephants", "pilot-plane-1999", "iceland", "golf",
-  "adrenaline", "travel-spain", "ski-2000", "ai-film-certificate",
-  "zip-line-iceland", "fast-cars", "africa-wild-pigs", "pilot-solo-certificate",
-  "ski-2025", "travel-heidelberg", "zip-line-with-kids", "airforce-fireman",
-];
-
 function slugify(s: string): string {
-  return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  return s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
 }
 
 const SLIDES = Object.entries(IMAGES)
   .map(([path, url]) => {
     const file = path.split("/").pop() ?? "";
-    const label = file.replace(/\.[^.]+$/, "").replace(/\s+/g, " ").trim();
-    return { url, label, slug: slugify(label) };
+    const label = file
+      .replace(/\.[^.]+$/, "")
+      .replace(/\s+/g, " ")
+      .trim();
+    return { url, label, slug: slugify(label), file };
   })
-  .sort((a, b) => {
-    const ia = ORDER.indexOf(a.slug);
-    const ib = ORDER.indexOf(b.slug);
-    return (ia < 0 ? 999 : ia) - (ib < 0 ? 999 : ib) || a.label.localeCompare(b.label);
-  });
+  .sort((a, b) => a.file.localeCompare(b.file, undefined, { numeric: true, sensitivity: "base" }));
 
 const STEP = 360 / SLIDES.length;
 const AUTO_DEG_PER_MS = 360 / 70000; // one revolution per 70s
@@ -127,7 +121,17 @@ export function InterestsCarousel() {
   useEffect(() => {
     if (!expanded) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setExpanded(null);
+      if (e.key === "Escape") {
+        setExpanded(null);
+      } else if (e.key === "ArrowLeft") {
+        const idx = SLIDES.findIndex((s) => s.slug === expanded.slug);
+        const prevIdx = (idx - 1 + SLIDES.length) % SLIDES.length;
+        setExpanded(SLIDES[prevIdx]);
+      } else if (e.key === "ArrowRight") {
+        const idx = SLIDES.findIndex((s) => s.slug === expanded.slug);
+        const nextIdx = (idx + 1) % SLIDES.length;
+        setExpanded(SLIDES[nextIdx]);
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -147,7 +151,10 @@ export function InterestsCarousel() {
     dragDistanceRef.current += Math.abs(dx);
     // Only capture the pointer once this is clearly a drag, so a plain tap is
     // never captured and its click/hit-test stays reliable.
-    if (dragDistanceRef.current > CLICK_DRAG_TOLERANCE_PX && !e.currentTarget.hasPointerCapture(e.pointerId)) {
+    if (
+      dragDistanceRef.current > CLICK_DRAG_TOLERANCE_PX &&
+      !e.currentTarget.hasPointerCapture(e.pointerId)
+    ) {
       e.currentTarget.setPointerCapture(e.pointerId);
     }
     angleRef.current = (angleRef.current + dx * DRAG_DEG_PER_PX) % 360;
@@ -171,6 +178,23 @@ export function InterestsCarousel() {
   };
 
   const expandedMd = expanded ? mdForSlug(expanded.slug) : null;
+  const currentIndex = expanded ? SLIDES.findIndex((s) => s.slug === expanded.slug) : -1;
+
+  const onPrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (currentIndex >= 0) {
+      const prevIdx = (currentIndex - 1 + SLIDES.length) % SLIDES.length;
+      setExpanded(SLIDES[prevIdx]);
+    }
+  };
+
+  const onNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (currentIndex >= 0) {
+      const nextIdx = (currentIndex + 1) % SLIDES.length;
+      setExpanded(SLIDES[nextIdx]);
+    }
+  };
 
   return (
     <>
@@ -213,6 +237,15 @@ export function InterestsCarousel() {
           aria-label={expanded.label}
           onClick={() => setExpanded(null)}
         >
+          <button
+            type="button"
+            className="carousel-lightbox-nav carousel-lightbox-nav--prev"
+            onClick={onPrev}
+            aria-label="Previous image"
+          >
+            &lt;&lt;
+          </button>
+
           <div
             className={`carousel-lightbox-card ${expandedMd ? "carousel-lightbox-card--with-text" : ""}`}
             onClick={(e) => e.stopPropagation()}
@@ -231,6 +264,15 @@ export function InterestsCarousel() {
               {expandedMd && <MdText text={expandedMd} />}
             </div>
           </div>
+
+          <button
+            type="button"
+            className="carousel-lightbox-nav carousel-lightbox-nav--next"
+            onClick={onNext}
+            aria-label="Next image"
+          >
+            &gt;&gt;
+          </button>
         </div>
       )}
     </>
