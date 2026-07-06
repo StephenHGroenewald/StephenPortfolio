@@ -247,7 +247,7 @@ export function InterestsCarousel() {
           </button>
 
           <div
-            className={`carousel-lightbox-card ${expandedMd ? "carousel-lightbox-card--with-text" : ""}`}
+            className="relative flex flex-col items-end"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -258,10 +258,14 @@ export function InterestsCarousel() {
             >
               [ CLOSE ]
             </button>
-            <img src={expanded.url} alt={expanded.label} />
-            <div className="carousel-lightbox-body">
-              <span className="carousel-lightbox-label">{expanded.label}</span>
-              {expandedMd && <MdText text={expandedMd} />}
+            <div
+              className={`carousel-lightbox-card ${expandedMd ? "carousel-lightbox-card--with-text" : ""}`}
+            >
+              <img src={expanded.url} alt={expanded.label} />
+              <div className="carousel-lightbox-body">
+                <span className="carousel-lightbox-label">{expanded.label}</span>
+                {expandedMd && <MdText text={expandedMd} />}
+              </div>
             </div>
           </div>
 
