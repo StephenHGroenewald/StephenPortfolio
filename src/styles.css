@@ -138,3 +138,98 @@ html[data-theme="default-dark"] body {
     display: none;
   }
 }
+
+/* ── FOLIO 03: 3D interests carousel ─────────────────────────────── */
+.carousel-stage {
+  --car-radius: 430px;
+  --car-panel-w: 150px;
+  --car-panel-h: 260px;
+  height: 650px;
+  perspective: 1400px;
+  perspective-origin: 50% 8%;
+  overflow: visible;
+}
+
+.carousel-tilt {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 60px;
+  transform-style: preserve-3d;
+  transform: rotateX(-14deg);
+}
+
+.carousel-ring {
+  position: relative;
+  width: var(--car-panel-w);
+  height: var(--car-panel-h);
+  transform-style: preserve-3d;
+  animation: carousel-spin 70s linear infinite;
+}
+
+.carousel-panel {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid rgba(58, 47, 38, 0.9);
+  background: #0b0906;
+  backface-visibility: visible;
+}
+
+.carousel-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.28) saturate(0.88) brightness(0.88) contrast(1.06);
+}
+
+.carousel-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(11, 9, 6, 0.35) 0%, rgba(11, 9, 6, 0) 35%, rgba(11, 9, 6, 0.55) 100%),
+    radial-gradient(ellipse at 80% 20%, rgba(232, 121, 42, 0.18), transparent 60%);
+}
+
+.carousel-panel span {
+  position: absolute;
+  inset-inline: 8px;
+  bottom: 12px;
+  z-index: 1;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #f5efe3;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+}
+
+@keyframes carousel-spin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+@media (max-width: 767px) {
+  .carousel-stage {
+    --car-radius: 250px;
+    --car-panel-w: 88px;
+    --car-panel-h: 152px;
+    height: 410px;
+    perspective: 900px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-ring {
+    animation: none;
+  }
+}

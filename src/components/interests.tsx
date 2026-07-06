@@ -1,3 +1,5 @@
+import { InterestsCarousel } from "./interests-carousel";
+
 const INTERESTS = [
   "Golf",
   "Flying",
@@ -53,6 +55,8 @@ export function Interests() {
           AI champions, church groups, and mentorship.
         </p>
       </div>
+
+      <InterestsCarousel />
 
       <div className="relative mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
         {INTERESTS.map((interest, i) => (
