@@ -1,25 +1,37 @@
 import { useEffect, useRef, useState } from "react";
 
-const SLIDES = [
-  { src: "sky-diving", label: "Sky Diving" },
-  { src: "africa", label: "Africa" },
-  { src: "pilot-plane", label: "Pilot Life" },
-  { src: "iceland-2", label: "Iceland" },
-  { src: "golf", label: "Golf" },
-  { src: "adrenaline-1", label: "Adrenaline" },
-  { src: "spain", label: "Spain" },
-  { src: "army", label: "Army Days" },
-  { src: "ski-2000", label: "Ski 2000" },
-  { src: "ai-film-certificate", label: "AI Filmmaker" },
-  { src: "iceland-3", label: "Glacier Days" },
-  { src: "solo-flight", label: "Solo Flight" },
-  { src: "travel-1", label: "On the Road" },
-  { src: "adrenaline-2", label: "Full Send" },
-  { src: "icelnad-1", label: "Iceland" },
-  { src: "sky-diving-2", label: "Freefall" },
-  { src: "africa-3", label: "Safari" },
-  { src: "face-swap2", label: "AI Playground" },
+// Each image in src/assets/carousel/ becomes a panel. The FILENAME (without
+// extension) is the on-screen title, verbatim — so renaming "Fast Cars.jpg"
+// renames the panel with no code change. Add/remove an image = add/remove a
+// panel. Optional order below; anything not listed is appended alphabetically.
+const IMAGES = import.meta.glob("../assets/carousel/*.{jpg,jpeg,png}", {
+  eager: true,
+  import: "default",
+}) as Record<string, string>;
+
+// Preferred display order by slug (keeps topics from clustering); optional.
+const ORDER = [
+  "sky-diving", "africa", "pilot-life", "iceland", "golf", "adrenaline",
+  "spain", "army-days", "ski-2000", "ai-filmmaker", "glacier-days",
+  "solo-flight", "on-the-road", "full-send", "iceland-roads", "freefall",
+  "safari", "fast-cars",
 ];
+
+function slugify(s: string): string {
+  return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+const SLIDES = Object.entries(IMAGES)
+  .map(([path, url]) => {
+    const file = path.split("/").pop() ?? "";
+    const label = file.replace(/\.[^.]+$/, "");
+    return { url, label, slug: slugify(label) };
+  })
+  .sort((a, b) => {
+    const ia = ORDER.indexOf(a.slug);
+    const ib = ORDER.indexOf(b.slug);
+    return (ia < 0 ? 999 : ia) - (ib < 0 ? 999 : ib) || a.label.localeCompare(b.label);
+  });
 
 const STEP = 360 / SLIDES.length;
 const AUTO_DEG_PER_MS = 360 / 70000; // one revolution per 70s
@@ -158,7 +170,7 @@ export function InterestsCarousel() {
     }
   };
 
-  const expandedMd = expanded ? mdForSlug(expanded.src) : null;
+  const expandedMd = expanded ? mdForSlug(expanded.slug) : null;
 
   return (
     <>
@@ -173,7 +185,7 @@ export function InterestsCarousel() {
           <div ref={ringRef} className="carousel-ring">
             {SLIDES.map((slide, i) => (
               <figure
-                key={slide.src}
+                key={slide.slug}
                 className="carousel-panel"
                 data-idx={i}
                 style={{
@@ -181,7 +193,7 @@ export function InterestsCarousel() {
                 }}
               >
                 <div className="carousel-panel-media">
-                  <img src={`/assets/carousel/${slide.src}.jpg`} alt={slide.label} loading="lazy" />
+                  <img src={slide.url} alt={slide.label} loading="lazy" />
                 </div>
                 <span className="carousel-label carousel-label--front">{slide.label}</span>
                 <span className="carousel-label carousel-label--back" aria-hidden="true">
@@ -213,7 +225,7 @@ export function InterestsCarousel() {
             >
               [ CLOSE ]
             </button>
-            <img src={`/assets/carousel/${expanded.src}.jpg`} alt={expanded.label} />
+            <img src={expanded.url} alt={expanded.label} />
             <div className="carousel-lightbox-body">
               <span className="carousel-lightbox-label">{expanded.label}</span>
               {expandedMd && <MdText text={expandedMd} />}
