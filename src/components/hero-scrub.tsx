@@ -139,8 +139,24 @@ export function HeroScrub({ variant = "v2" }: { variant?: HeroVariant }) {
       { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.08 },
     );
 
+    const nextSection = container.nextElementSibling || document.getElementById("career");
+
+    const textAnim = gsap.to(chromeRef.current, {
+      x: "100vw",
+      opacity: 0,
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: nextSection || container,
+        start: nextSection ? "top bottom" : () => `top+=${scrollDistance} top`,
+        end: nextSection ? "top center" : () => `top+=${scrollDistance + window.innerHeight * 0.8} top`,
+        scrub: true,
+        invalidateOnRefresh: true,
+      },
+    });
+
     return () => {
       st.kill();
+      textAnim.kill();
       resizeObserver.disconnect();
     };
   }, []);

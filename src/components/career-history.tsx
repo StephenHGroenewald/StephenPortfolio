@@ -1,3 +1,9 @@
+import { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 const ROLES = [
   {
     title: "Senior Partner Solution Engineer",
@@ -38,8 +44,51 @@ const EARLIER = [
 ];
 
 export function CareerHistory() {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const cards = container.querySelectorAll(".role-card");
+    if (!cards.length) return;
+
+    const triggers: any[] = [];
+
+    cards.forEach((card) => {
+      const anim = gsap.fromTo(
+        card,
+        { x: 120, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 92%",
+            toggleActions: "play none none reverse",
+            invalidateOnRefresh: true,
+          },
+        }
+      );
+      if (anim.scrollTrigger) {
+        triggers.push(anim.scrollTrigger);
+      }
+    });
+
+    return () => {
+      triggers.forEach((t) => t.kill());
+    };
+  }, []);
+
   return (
-    <section id="career" className="relative overflow-hidden px-6 py-16 md:px-10 md:py-24" style={{ backgroundColor: "var(--brand-bg)" }}>
+    <section
+      id="career"
+      ref={containerRef}
+      className="relative overflow-hidden px-6 py-16 md:px-10 md:py-24"
+      style={{ backgroundColor: "var(--brand-bg)" }}
+    >
       <video
         className="ambient-video absolute inset-0 h-full w-full object-cover opacity-30"
         autoPlay
@@ -73,7 +122,7 @@ export function CareerHistory() {
           {ROLES.map((role) => (
             <div
               key={role.title + role.period}
-              className="grid grid-cols-1 gap-6 border-t py-10 md:grid-cols-[1fr_auto] md:items-start"
+              className="role-card grid grid-cols-1 gap-6 border-t py-10 md:grid-cols-[1fr_auto] md:items-start"
               style={{ borderColor: "var(--brand-hairline)" }}
             >
               <div>

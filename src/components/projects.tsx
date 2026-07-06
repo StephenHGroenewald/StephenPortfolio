@@ -1,3 +1,9 @@
+import { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 const PROJECTS = [
   {
     name: "Project Name One",
@@ -59,9 +65,48 @@ function ViewProjectLink() {
 }
 
 export function Projects() {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const cards = container.querySelectorAll(".project-card");
+    if (!cards.length) return;
+
+    const triggers: any[] = [];
+
+    cards.forEach((card) => {
+      const anim = gsap.fromTo(
+        card,
+        { x: 120, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 92%",
+            toggleActions: "play none none reverse",
+            invalidateOnRefresh: true,
+          },
+        }
+      );
+      if (anim.scrollTrigger) {
+        triggers.push(anim.scrollTrigger);
+      }
+    });
+
+    return () => {
+      triggers.forEach((t) => t.kill());
+    };
+  }, []);
+
   return (
     <section
       id="projects"
+      ref={containerRef}
       className="relative px-6 py-16 md:px-10 md:py-24"
       style={{ backgroundColor: "var(--brand-bg-raised)" }}
     >
@@ -76,7 +121,7 @@ export function Projects() {
         {PROJECTS.map((project) => (
           <div
             key={project.name}
-            className={`relative rounded-sm border p-8 ${project.rotate} ${project.span}`}
+            className={`project-card relative rounded-sm border p-8 ${project.rotate} ${project.span}`}
             style={{
               backgroundColor: "var(--brand-bg)",
               borderColor: "var(--brand-hairline)",
