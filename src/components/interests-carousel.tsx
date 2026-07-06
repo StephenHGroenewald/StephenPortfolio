@@ -113,19 +113,29 @@ export function InterestsCarousel() {
     const dx = e.clientX - lastXRef.current;
     lastXRef.current = e.clientX;
     dragDistanceRef.current += Math.abs(dx);
+    // Only capture the pointer once this is clearly a drag, so a plain tap is
+    // never captured and its click/hit-test stays reliable.
+    if (dragDistanceRef.current > CLICK_DRAG_TOLERANCE_PX && !e.currentTarget.hasPointerCapture(e.pointerId)) {
+      e.currentTarget.setPointerCapture(e.pointerId);
+    }
     angleRef.current = (angleRef.current + dx * DRAG_DEG_PER_PX) % 360;
   };
 
   const endDrag = (e: React.PointerEvent<HTMLDivElement>) => {
+    const wasDragging = draggingRef.current;
     draggingRef.current = false;
     if (e.currentTarget.hasPointerCapture(e.pointerId)) {
       e.currentTarget.releasePointerCapture(e.pointerId);
     }
-  };
-
-  const onPanelClick = (slide: Slide) => {
-    if (dragDistanceRef.current > CLICK_DRAG_TOLERANCE_PX) return;
-    setExpanded(slide);
+    // A tap (negligible movement): hit-test the panel under the pointer and
+    // open it. Done here rather than via each figure's onClick so it fires
+    // reliably regardless of pointer capture.
+    if (wasDragging && dragDistanceRef.current <= CLICK_DRAG_TOLERANCE_PX) {
+      const el = document.elementFromPoint(e.clientX, e.clientY);
+      const panel = el?.closest<HTMLElement>(".carousel-panel");
+      const idx = panel?.dataset.idx ? Number(panel.dataset.idx) : -1;
+      if (idx >= 0 && idx < SLIDES.length) setExpanded(SLIDES[idx]);
+    }
   };
 
   const expandedMd = expanded ? mdForSlug(expanded.src) : null;
@@ -145,10 +155,10 @@ export function InterestsCarousel() {
               <figure
                 key={slide.src}
                 className="carousel-panel"
+                data-idx={i}
                 style={{
                   transform: `rotateY(${i * STEP}deg) translateZ(var(--car-radius))`,
                 }}
-                onClick={() => onPanelClick(slide)}
               >
                 <div className="carousel-panel-media">
                   <img src={`/assets/carousel/${slide.src}.jpg`} alt={slide.label} loading="lazy" />
