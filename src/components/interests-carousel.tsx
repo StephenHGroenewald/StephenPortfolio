@@ -75,14 +75,16 @@ export function InterestsCarousel() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let raf = 0;
     let last = performance.now();
+    let writtenAngle = Number.NaN;
     const tick = (now: number) => {
       const dt = now - last;
       last = now;
       if (!draggingRef.current && !pausedRef.current && !reduced) {
         angleRef.current = (angleRef.current + dt * AUTO_DEG_PER_MS) % 360;
       }
-      if (ringRef.current) {
-        ringRef.current.style.transform = `rotateY(${angleRef.current}deg)`;
+      if (ringRef.current && angleRef.current !== writtenAngle) {
+        writtenAngle = angleRef.current;
+        ringRef.current.style.transform = `rotateY(${writtenAngle}deg)`;
       }
       raf = requestAnimationFrame(tick);
     };
