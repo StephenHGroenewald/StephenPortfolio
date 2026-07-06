@@ -175,7 +175,7 @@ export function HeroScrub({ variant = "v2" }: { variant?: HeroVariant }) {
 
         <h1
           data-reveal
-          className="max-w-[90vw] text-[15vw] leading-[0.85] tracking-wide uppercase md:max-w-[70vw] md:text-[7rem]"
+          className="max-w-[90vw] text-[15vw] leading-[0.95] tracking-wide uppercase md:max-w-[70vw] md:text-[7rem]"
           style={{ fontFamily: "var(--font-display)", color: "var(--brand-ink)" }}
         >
           Stephen Groenewald

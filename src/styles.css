@@ -149,7 +149,7 @@ html[data-theme="default-dark"] body {
   --car-radius: 430px;
   --car-panel-w: 150px;
   --car-panel-h: 260px;
-  height: 650px;
+  height: 480px;
   perspective: 1400px;
   perspective-origin: 50% 8%;
   overflow: visible;
@@ -374,13 +374,14 @@ html[data-theme="default-dark"] body {
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.15em;
-  color: #f5efe3;
+  color: var(--brand-accent);
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
   cursor: pointer;
+  transition: color 150ms ease;
 }
 
 .carousel-lightbox-close:hover {
-  color: var(--brand-accent);
+  color: #f5efe3;
 }
 
 .carousel-lightbox-nav {
@@ -441,7 +442,7 @@ html[data-theme="default-dark"] body {
     --car-radius: 250px;
     --car-panel-w: 88px;
     --car-panel-h: 152px;
-    height: 410px;
+    height: 300px;
     perspective: 900px;
   }
 }

@@ -4,7 +4,7 @@ export function Interests() {
   return (
     <section
       id="interests"
-      className="relative overflow-hidden px-6 py-24 md:px-10 md:py-32"
+      className="relative overflow-hidden px-6 pt-10 pb-36 md:px-10 md:pt-14 md:pb-48"
       style={{ backgroundColor: "var(--brand-bg)" }}
     >
       <video
@@ -29,12 +29,6 @@ export function Interests() {
       />
 
       <div className="relative mx-auto max-w-3xl text-center">
-        <span
-          className="mb-4 block text-[11px] tracking-[0.2em] uppercase"
-          style={{ fontFamily: "var(--font-mono)", color: "var(--brand-accent)" }}
-        >
-          FOLIO 03
-        </span>
         <h2
           className="text-4xl uppercase tracking-wide md:text-6xl"
           style={{ fontFamily: "var(--font-display)", color: "var(--brand-ink)" }}

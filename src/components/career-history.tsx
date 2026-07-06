@@ -3,39 +3,43 @@ const ROLES = [
     title: "Senior Partner Solution Engineer",
     company: "Adyen, Netherlands",
     period: "2022 / PRESENT",
+    years: "4 years",
     body: "Senior partnership manager for Premier and Premier+ accounts, driving GTM objectives through technical excellence and roadmap alignment. Lead consultant for internal AI adoption and architect of the scalable low-touch partner framework.",
   },
   {
     title: "Channel Enablement Manager",
     company: "Innervation PAN African Payment Solutions",
     period: "2019 / 2022",
+    years: "3 years",
     body: "Migrated 50+ key partners to a group-wide platform, replacing legacy ISO 8583 with modern XML and JSON protocols. Conceptualized a world-first C# integration paradigm that cut retail implementation timelines by 86%.",
   },
   {
     title: "IT Manager",
     company: "AfricaWeather, South Africa",
     period: "2016 / 2018",
+    years: "2 years",
     body: "Directed the IT division turnaround, migrating 20+ servers to AWS and stabilizing weather platforms serving aviation, mining, and insurance clients, working alongside the Australian shareholders on the board.",
   },
   {
     title: "Partner Manager & Technology Adviser",
     company: "Innervation",
     period: "2010 / 2016",
+    years: "6 years",
     body: "Established the channel division and defined partnership models for 50+ strategic channels, enabling loyalty and gift-card retail solutions for SME and corporate retailers.",
   },
 ];
 
 const EARLIER = [
-  "Business Unit Manager / DVT / 2005-2009",
-  "Co-Founder / Solutional, Radical CRM / 2001-2005",
-  "Lead Developer / Rufus Leonard, London / 1999-2001",
-  "Senior Analyst Developer / Ixchange / 1997-1999",
-  "Developer / Syntactica / 1993-1997",
+  { date: "2005-2009", years: "4 years", role: "Business Unit Manager / DVT" },
+  { date: "2001-2005", years: "4 years", role: "Co-Founder / Solutional, Radical CRM" },
+  { date: "1999-2001", years: "2 years", role: "Lead Developer / Rufus Leonard, London" },
+  { date: "1997-1999", years: "2 years", role: "Senior Analyst Developer / Ixchange" },
+  { date: "1993-1997", years: "4 years", role: "Developer / Syntactica" },
 ];
 
 export function CareerHistory() {
   return (
-    <section id="career" className="relative overflow-hidden px-6 py-24 md:px-10 md:py-32" style={{ backgroundColor: "var(--brand-bg)" }}>
+    <section id="career" className="relative overflow-hidden px-6 py-16 md:px-10 md:py-24" style={{ backgroundColor: "var(--brand-bg)" }}>
       <video
         className="ambient-video absolute inset-0 h-full w-full object-cover opacity-30"
         autoPlay
@@ -62,7 +66,7 @@ export function CareerHistory() {
           className="mb-12 block text-[11px] tracking-[0.2em] uppercase md:mb-16"
           style={{ fontFamily: "var(--font-mono)", color: "var(--brand-accent)" }}
         >
-          FOLIO 02 / Career History
+          Career History
         </span>
 
         <div>
@@ -88,7 +92,7 @@ export function CareerHistory() {
                       color: "var(--brand-ink)",
                     }}
                   >
-                    {role.period}
+                    {role.period} <span className="opacity-60">[{role.years}]</span>
                   </span>
                 </div>
                 <p className="mt-3 max-w-xl text-sm md:text-base" style={{ color: "var(--brand-ink-dim)" }}>
@@ -113,13 +117,15 @@ export function CareerHistory() {
             Earlier
           </span>
           <ul className="flex flex-col gap-2">
-            {EARLIER.map((line) => (
+            {EARLIER.map((item) => (
               <li
-                key={line}
+                key={item.role}
                 className="text-xs tracking-[0.08em] uppercase md:text-sm"
                 style={{ fontFamily: "var(--font-mono)", color: "var(--brand-ink-dim)" }}
               >
-                {line}
+                <span style={{ color: "var(--brand-accent)" }}>{item.date}</span>{" "}
+                <span style={{ opacity: 0.6 }}>[{item.years}]</span>{" "}
+                <span>/ {item.role}</span>
               </li>
             ))}
           </ul>

@@ -62,7 +62,7 @@ export function Projects() {
   return (
     <section
       id="projects"
-      className="relative px-6 py-24 md:px-10 md:py-32"
+      className="relative px-6 py-16 md:px-10 md:py-24"
       style={{ backgroundColor: "var(--brand-bg-raised)" }}
     >
       <h2

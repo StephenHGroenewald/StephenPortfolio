@@ -199,7 +199,7 @@ export function InterestsCarousel() {
   return (
     <>
       <div
-        className="carousel-stage relative mx-auto mt-16 w-full max-w-5xl"
+        className="carousel-stage relative mx-auto mt-8 w-full max-w-5xl"
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
