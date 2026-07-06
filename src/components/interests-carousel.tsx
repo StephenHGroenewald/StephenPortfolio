@@ -11,10 +11,10 @@ const IMAGES = import.meta.glob("../assets/carousel/*.{jpg,jpeg,png}", {
 
 // Preferred display order by slug (keeps topics from clustering); optional.
 const ORDER = [
-  "sky-diving", "africa", "pilot-life", "iceland", "golf", "adrenaline",
-  "spain", "army-days", "ski-2000", "ai-filmmaker", "glacier-days",
-  "solo-flight", "on-the-road", "full-send", "iceland-roads", "freefall",
-  "safari", "fast-cars",
+  "sky-diving", "africa-elephants", "pilot-plane-1999", "iceland", "golf",
+  "adrenaline", "travel-spain", "ski-2000", "ai-film-certificate",
+  "zip-line-iceland", "fast-cars", "africa-wild-pigs", "pilot-solo-certificate",
+  "ski-2025", "travel-heidelberg", "zip-line-with-kids", "airforce-fireman",
 ];
 
 function slugify(s: string): string {
@@ -24,7 +24,7 @@ function slugify(s: string): string {
 const SLIDES = Object.entries(IMAGES)
   .map(([path, url]) => {
     const file = path.split("/").pop() ?? "";
-    const label = file.replace(/\.[^.]+$/, "");
+    const label = file.replace(/\.[^.]+$/, "").replace(/\s+/g, " ").trim();
     return { url, label, slug: slugify(label) };
   })
   .sort((a, b) => {
