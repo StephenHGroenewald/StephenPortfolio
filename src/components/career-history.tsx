@@ -10,6 +10,7 @@ const ROLES = [
     company: "Adyen, Netherlands",
     period: "2022 / PRESENT",
     years: "4 years",
+    icon: "terminal",
     body: "Senior partnership manager for Premier and Premier+ accounts, driving GTM objectives through technical excellence and roadmap alignment. Lead consultant for internal AI adoption and architect of streamlined partner integration and verification systems.",
   },
   {
@@ -17,6 +18,7 @@ const ROLES = [
     company: "Innervation PAN African Payment Solutions",
     period: "2019 / 2022",
     years: "3 years",
+    icon: "briefcase",
     body: "Migrated 50+ key partners to a group-wide platform, replacing legacy ISO 8583 with modern XML and JSON protocols. Conceptualized and prototyped a pioneering C# integration paradigm, projected to cut retail implementation timelines by 86%.",
   },
   {
@@ -24,6 +26,7 @@ const ROLES = [
     company: "AfricaWeather, South Africa",
     period: "2016 / 2018",
     years: "2 years",
+    icon: "cloud-lightning",
     body: "Directed the IT division turnaround, migrating 20+ servers to AWS. Stabilized critical forecasting and real-time storm/lightning alert platforms serving mining operations, schools, golf courses, and insurance clients while aligning with Australian board shareholders.",
   },
   {
@@ -31,9 +34,50 @@ const ROLES = [
     company: "Innervation",
     period: "2010 / 2016",
     years: "6 years",
+    icon: "network",
     body: "Established the partner channel division and defined partnership models for 50+ strategic channels, enabling loyalty and gift-card retail solutions for SME and corporate retailers.",
   },
 ];
+
+function renderRoleIcon(icon: string) {
+  const commonClass = "hidden h-12 w-12 text-[var(--brand-accent)] md:block opacity-90";
+  
+  switch (icon) {
+    case "terminal":
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={commonClass}>
+          <polyline points="4 17 10 11 4 5" />
+          <line x1="12" y1="19" x2="20" y2="19" />
+          <rect x="2" y="3" width="20" height="18" rx="2" ry="2" strokeWidth="1" stroke="currentColor" opacity="0.2" />
+        </svg>
+      );
+    case "briefcase":
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={commonClass}>
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+        </svg>
+      );
+    case "cloud-lightning":
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={commonClass}>
+          <path d="M19 16.9A5 5 0 0 0 18 7h-1.26a8 8 0 1 0-11.62 8.58" />
+          <polyline points="13 11 9 17 12 17 10 23" />
+        </svg>
+      );
+    case "network":
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={commonClass}>
+          <rect x="16" y="16" width="6" height="6" rx="1" />
+          <rect x="2" y="16" width="6" height="6" rx="1" />
+          <rect x="9" y="2" width="6" height="6" rx="1" />
+          <path d="M12 8v8M5 16v-3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
 
 const EARLIER = [
   { date: "2005-2009", years: "4 years", role: "Business Unit Manager / DVT" },
@@ -148,12 +192,7 @@ export function CareerHistory() {
                   {role.company}. {role.body}
                 </p>
               </div>
-              <img
-                src="/assets/icons/briefcase.png"
-                alt=""
-                aria-hidden="true"
-                className="hidden h-16 w-16 opacity-80 md:block"
-              />
+              {renderRoleIcon(role.icon)}
             </div>
           ))}
         </div>

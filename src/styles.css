@@ -451,3 +451,32 @@ html[data-theme="default-dark"] body {
   }
 }
 
+/* Custom Emblem Cursor styling */
+.custom-cursor {
+  display: none;
+  pointer-events: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  width: 28px;
+  height: 28px;
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              height 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              filter 0.25s ease;
+}
+
+.custom-cursor--hover {
+  width: 44px;
+  height: 44px;
+  filter: drop-shadow(0 0 12px rgba(232, 121, 42, 0.75));
+}
+
+@media (pointer: fine) {
+  html, body, a, button, [role="button"], input, select, textarea, .cursor-pointer {
+    cursor: none !important;
+  }
+  .custom-cursor {
+    display: block;
+  }
+}

@@ -5,6 +5,7 @@ import { CareerHistory } from "./career-history";
 import { Projects } from "./projects";
 import { Interests } from "./interests";
 import { Contact } from "./contact";
+import { CustomCursor } from "./custom-cursor";
 
 export function PortfolioPage({ variant }: { variant: HeroVariant }) {
   return (
@@ -17,6 +18,7 @@ export function PortfolioPage({ variant }: { variant: HeroVariant }) {
         <Interests />
         <Contact />
       </main>
+      <CustomCursor />
     </SmoothScroll>
   );
 }
