@@ -36,14 +36,15 @@ export function Interests() {
           FOLIO 03
         </span>
         <h2
-          className="text-4xl uppercase tracking-tight md:text-6xl"
+          className="text-4xl uppercase tracking-wide md:text-6xl"
           style={{ fontFamily: "var(--font-display)", color: "var(--brand-ink)" }}
         >
           Interests
         </h2>
         <p className="mx-auto mt-4 max-w-md text-sm md:text-base" style={{ color: "var(--brand-ink-dim)" }}>
-          Off the clock: making things, chasing adrenaline, and giving time to
-          AI champions, church groups, and mentorship.
+          Off the clock: spending time with my kids, canoeing, video editing,
+          building vibe engineering apps, community building and mentorship,
+          generating music videos, and reading.
         </p>
       </div>
 

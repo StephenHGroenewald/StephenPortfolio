@@ -75,7 +75,7 @@ export function CareerHistory() {
               <div>
                 <div className="flex flex-wrap items-baseline gap-3">
                   <h3
-                    className="text-3xl uppercase tracking-tight md:text-5xl"
+                    className="text-3xl uppercase tracking-wide md:text-5xl"
                     style={{ fontFamily: "var(--font-display)", color: "var(--brand-accent)" }}
                   >
                     {role.title}

@@ -66,7 +66,7 @@ export function Projects() {
       style={{ backgroundColor: "var(--brand-bg-raised)" }}
     >
       <h2
-        className="mb-12 text-4xl uppercase tracking-tight md:mb-16 md:text-6xl"
+        className="mb-12 text-4xl uppercase tracking-wide md:mb-16 md:text-6xl"
         style={{ fontFamily: "var(--font-display)", color: "var(--brand-ink)" }}
       >
         Current Projects
@@ -89,7 +89,7 @@ export function Projects() {
               className="absolute -top-3 right-8 h-7 w-7 rotate-12 opacity-90"
             />
             <h3
-              className="text-2xl uppercase tracking-tight md:text-3xl"
+              className="text-2xl uppercase tracking-wide md:text-3xl"
               style={{ fontFamily: "var(--font-display)", color: "var(--brand-ink)" }}
             >
               {project.name}

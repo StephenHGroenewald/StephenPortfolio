@@ -6,7 +6,7 @@ export function Contact() {
       style={{ backgroundColor: "var(--brand-bg-raised)" }}
     >
       <h2
-        className="text-5xl uppercase tracking-tight md:text-8xl"
+        className="text-5xl uppercase tracking-wide md:text-8xl"
         style={{ fontFamily: "var(--font-display)", color: "var(--brand-ink)" }}
       >
         Let&apos;s build

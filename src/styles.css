@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap");
 @import "tailwindcss" source(none);
 @source "../src";
 @source "../packages/quanta/src";
@@ -103,6 +103,11 @@
     font-family: var(--hf-type-family-secondary);
   }
 
+  p {
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+  }
+
   * {
     border-color: var(--hf-color-border-default);
   }
@@ -124,7 +129,7 @@
   --brand-hairline: #3a2f26;
   --font-display: "Anton", "Arial Narrow", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --font-body: "Inter Tight", "Inter", sans-serif;
+  --font-body: "Inter", "Inter Tight", sans-serif;
 }
 
 html[data-theme="default-dark"] body {
