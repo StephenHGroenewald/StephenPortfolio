@@ -93,6 +93,11 @@ export function HeroScrub({ variant = "v2" }: { variant?: HeroVariant }) {
     // First frame loads and paints immediately (screenshot-safe initial state).
     loadFrame(0, () => resizeCanvas());
 
+    const resizeObserver = new ResizeObserver(() => {
+      resizeCanvas();
+    });
+    resizeObserver.observe(container);
+
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (reducedMotion) {
@@ -102,14 +107,11 @@ export function HeroScrub({ variant = "v2" }: { variant?: HeroVariant }) {
       if (frameTagRef.current) {
         frameTagRef.current.textContent = `FRAME ${FRAME_COUNT}/${FRAME_COUNT}`;
       }
-      window.addEventListener("resize", resizeCanvas);
-      return () => window.removeEventListener("resize", resizeCanvas);
+      return () => resizeObserver.disconnect();
     }
 
     // Stream the rest of the sequence in the background.
     for (let i = 1; i < FRAME_COUNT; i += 1) loadFrame(i);
-
-    window.addEventListener("resize", resizeCanvas);
 
     const isMobile = window.innerWidth < 768;
     const scrollDistance = isMobile ? window.innerHeight * 1.1 : window.innerHeight * 1.9;
@@ -139,7 +141,7 @@ export function HeroScrub({ variant = "v2" }: { variant?: HeroVariant }) {
 
     return () => {
       st.kill();
-      window.removeEventListener("resize", resizeCanvas);
+      resizeObserver.disconnect();
     };
   }, []);
 

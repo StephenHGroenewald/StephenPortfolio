@@ -14,7 +14,7 @@ export function Contact() {
         something.
       </h2>
       <p className="mt-5 max-w-sm text-sm md:text-base" style={{ color: "var(--brand-ink-dim)" }}>
-        Open to new roles, collaborations, and interesting problems.
+        Open to collaborations and solving interesting problems.
       </p>
 
       <a

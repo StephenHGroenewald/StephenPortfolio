@@ -1,14 +1,5 @@
 import { InterestsCarousel } from "./interests-carousel";
 
-const INTERESTS = [
-  "Golf",
-  "Flying",
-  "Prototyping",
-  "YouTubing",
-  "Reading & learning",
-  "Adrenaline sports",
-];
-
 export function Interests() {
   return (
     <section
@@ -57,29 +48,6 @@ export function Interests() {
       </div>
 
       <InterestsCarousel />
-
-      <div className="relative mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
-        {INTERESTS.map((interest, i) => (
-          <div
-            key={interest}
-            className={`flex items-center justify-center rounded-sm border px-4 py-10 text-center ${
-              i % 2 === 1 ? "md:translate-y-6" : ""
-            }`}
-            style={{
-              backgroundColor: "rgba(23,19,16,0.72)",
-              borderColor: "var(--brand-hairline)",
-              backdropFilter: "blur(2px)",
-            }}
-          >
-            <span
-              className="text-xs tracking-[0.1em] uppercase md:text-sm"
-              style={{ fontFamily: "var(--font-mono)", color: "var(--brand-ink)" }}
-            >
-              {interest}
-            </span>
-          </div>
-        ))}
-      </div>
     </section>
   );
 }
