@@ -14,8 +14,8 @@ export function PortfolioPage({ variant }: { variant: HeroVariant }) {
       <main>
         <HeroScrub key={variant} variant={variant} />
         <CareerHistory />
-        <Projects />
         <Interests />
+        <Projects />
         <Contact />
       </main>
       <CustomCursor />

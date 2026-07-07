@@ -34,7 +34,7 @@ export function Contact() {
         className="mt-24 flex w-full max-w-4xl flex-col items-center justify-between gap-6 border-t pt-6 text-[11px] tracking-[0.15em] uppercase md:flex-row"
         style={{ borderColor: "var(--brand-hairline)", fontFamily: "var(--font-mono)", color: "var(--brand-ink-dim)" }}
       >
-        <span>© 2026 Stephen Groenewald • v1.0.2</span>
+        <span>© 2026 Stephen Groenewald • v1.0.3</span>
         <div className="flex items-center gap-6 normal-case">
           <a
             href="https://www.linkedin.com/in/stephengroenewald/"
