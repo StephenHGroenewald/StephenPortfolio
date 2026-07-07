@@ -94,6 +94,8 @@
     background-color: var(--hf-color-background-primary);
     color: var(--hf-color-text-primary);
     color-scheme: dark;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   body {
@@ -101,6 +103,8 @@
     background-color: var(--hf-color-background-primary);
     color: var(--hf-color-text-primary);
     font-family: var(--hf-type-family-secondary);
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   p {

@@ -87,6 +87,9 @@ export function HeroScrub({ variant = "v2" }: { variant?: HeroVariant }) {
         if (i === currentIndex) drawFrame(currentIndex);
         onDone?.();
       };
+      img.onerror = () => {
+        onDone?.();
+      };
       img.src = framePath(i);
     }
 
@@ -110,8 +113,18 @@ export function HeroScrub({ variant = "v2" }: { variant?: HeroVariant }) {
       return () => resizeObserver.disconnect();
     }
 
-    // Stream the rest of the sequence in the background.
-    for (let i = 1; i < FRAME_COUNT; i += 1) loadFrame(i);
+    // Stream the rest of the sequence in the background sequentially with concurrency
+    const concurrency = 4;
+    let nextToLoad = 1;
+    function loadNext() {
+      if (nextToLoad >= FRAME_COUNT) return;
+      const current = nextToLoad;
+      nextToLoad += 1;
+      loadFrame(current, loadNext);
+    }
+    for (let i = 0; i < concurrency; i += 1) {
+      loadNext();
+    }
 
     const isMobile = window.innerWidth < 768;
     const scrollDistance = isMobile ? window.innerHeight * 1.1 : window.innerHeight * 1.9;
