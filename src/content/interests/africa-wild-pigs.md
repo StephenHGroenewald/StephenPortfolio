@@ -1,1 +1,1 @@
-Exploring the African bush and spotting unique wildlife like wild pigs and warthogs is a thrilling adventure I always look forward to. Observing these quirky, resilient creatures as they forage and trot through the savanna adds a wonderful touch of character and excitement to any safari experience.
+This is a picture of me being very close to wild pigs near Kruger National Park. I just love being close to nature and the exhilaration and adrenaline of when you're close to wildlife. It's a feeling I always look forward to on every safari trip.

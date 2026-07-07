@@ -1,1 +1,1 @@
-I absolutely love high-adrenaline outdoor adventures, especially tackling challenging high ropes courses and swinging from rope ladders high above the ground. The rush of navigating obstacles suspended in the air, pushing my physical limits, and feeling the wind as I swing is an unmatched experience that keeps me feeling alive and energized.
+I absolutely love high-adrenaline outdoor adventures, especially tackling challenging fears of heights and swinging from rope ladders high above the ground.

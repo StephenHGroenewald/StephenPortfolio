@@ -1,1 +1,1 @@
-Earning my solo pilot certification was one of the most rewarding and defining milestones of my aviation journey. Taking to the skies completely on my own for the first time was a breathtaking mix of focus, independence, and pure joy, cementing my lifelong love for piloting aircraft.
+Earning my solo pilot certification was one of the most rewarding milestones of that journey. Taking to the skies completely on my own for the first time was a breathtaking mix of intense focus, independence, and pure joy. It cemented an unexpected but lifelong love for piloting aircraft.
