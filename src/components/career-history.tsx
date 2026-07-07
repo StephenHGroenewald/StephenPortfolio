@@ -170,7 +170,7 @@ export function CareerHistory() {
               style={{ borderColor: "var(--brand-hairline)" }}
             >
               <div>
-                <div className="flex flex-wrap items-baseline gap-3">
+                <div className="flex flex-col items-start gap-2">
                   <h3
                     className="text-3xl uppercase tracking-wide md:text-5xl"
                     style={{ fontFamily: "var(--font-display)", color: "var(--brand-accent)" }}
