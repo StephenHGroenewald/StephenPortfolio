@@ -93,7 +93,7 @@ export function Contact() {
           color: "var(--brand-ink-dim)",
         }}
       >
-        <span>© 2026 Stephen Groenewald • v1.0.7</span>
+        <span>© 2026 Stephen Groenewald • v1.0.8</span>
       </div>
     </footer>
   );
