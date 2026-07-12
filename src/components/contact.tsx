@@ -9,12 +9,12 @@ export function Contact() {
         className="text-5xl uppercase tracking-wide md:text-8xl"
         style={{ fontFamily: "var(--font-display)", color: "var(--brand-ink)" }}
       >
-        Let&apos;s build
+        Always
         <br />
-        something.
+        building.
       </h2>
       <p className="mt-5 max-w-sm text-sm md:text-base" style={{ color: "var(--brand-ink-dim)" }}>
-        Open to collaborations and solving interesting problems.
+        A space for my personal projects and creative experiments.
       </p>
 
       <a
@@ -27,7 +27,7 @@ export function Contact() {
           boxShadow: "0 0 40px rgba(232,121,42,0.35)",
         }}
       >
-        Get in touch
+        Coming soon
       </a>
 
       <div

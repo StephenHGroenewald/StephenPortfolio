@@ -29,7 +29,7 @@ export function Nav() {
           [
         </span>
         <span style={{ fontFamily: "var(--font-mono)", color: "var(--brand-ink)" }}>
-          Get in touch
+          Coming soon
         </span>
         <span
           aria-hidden="true"

@@ -6,32 +6,32 @@ gsap.registerPlugin(ScrollTrigger);
 
 const PROJECTS = [
   {
-    name: "Project Name One",
-    body: "Add a one-line description: what it does and who it is for.",
+    name: "Film & Sound",
+    body: "I shoot and create video with AI, then generate the music, VFX, and full sound design around it. An end-to-end craft I leaned into after Curious Refuge's AI Filmmaking course.",
     rotate: "-rotate-1",
     span: "md:col-span-2",
-    icon: "monitor",
+    icon: "film",
   },
   {
-    name: "Project Name Two",
-    body: "Add a one-line description and the stack you built it with.",
+    name: "Vibe Engineering",
+    body: "I build my own apps, tools, and services: vibe-engineering personal productivity software that powers my AI filmmaking and the rest of my projects.",
     rotate: "rotate-1",
     span: "",
-    icon: "database",
+    icon: "code",
   },
   {
-    name: "Project Name Three",
-    body: "Add a one-line description of the problem this solves.",
+    name: "Built on Vibes",
+    body: "A community for vibe engineers. I'm building a website to showcase everything I've made, help others build their own tools, and learn from what the community creates.",
     rotate: "rotate-1",
     span: "",
     icon: "globe",
   },
   {
-    name: "Project Name Four",
-    body: "Add a one-line description and a link to where it lives.",
+    name: "Healthy Fun",
+    body: "Canoeing is my summer happy place, out on the water among the boats and everyone swimming. I mix in the gym now and then, and chase any adrenaline sport I can find when I'm away on holiday.",
     rotate: "-rotate-1",
     span: "md:col-span-2",
-    icon: "layers",
+    icon: "activity",
   },
 ];
 
@@ -39,6 +39,34 @@ function renderProjectIcon(icon: string) {
   const commonClass = "absolute -top-3.5 right-8 h-7 w-7 rotate-12 opacity-90 text-[var(--brand-accent)]";
   
   switch (icon) {
+    case "activity":
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={commonClass}>
+          <rect x="2" y="3" width="20" height="18" rx="2" ry="2" fill="var(--brand-bg)" />
+          <polyline points="4 12 8 12 11 6 14 18 17 12 20 12" />
+        </svg>
+      );
+    case "code":
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={commonClass}>
+          <rect x="2" y="3" width="20" height="18" rx="2" ry="2" fill="var(--brand-bg)" />
+          <polyline points="8 9 5 12 8 15" />
+          <polyline points="16 9 19 12 16 15" />
+          <line x1="13" y1="8" x2="11" y2="16" />
+        </svg>
+      );
+    case "film":
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={commonClass}>
+          <rect x="2" y="3" width="20" height="18" rx="2" ry="2" fill="var(--brand-bg)" />
+          <line x1="7" y1="3" x2="7" y2="21" />
+          <line x1="17" y1="3" x2="17" y2="21" />
+          <line x1="2" y1="9" x2="7" y2="9" />
+          <line x1="2" y1="15" x2="7" y2="15" />
+          <line x1="17" y1="9" x2="22" y2="9" />
+          <line x1="17" y1="15" x2="22" y2="15" />
+        </svg>
+      );
     case "monitor":
       return (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={commonClass}>
@@ -103,7 +131,7 @@ function ViewProjectLink() {
         className="px-1 text-xs tracking-[0.15em] uppercase"
         style={{ fontFamily: "var(--font-mono)", color: "var(--brand-accent)" }}
       >
-        View project
+        Shared soon
       </span>
     </a>
   );
