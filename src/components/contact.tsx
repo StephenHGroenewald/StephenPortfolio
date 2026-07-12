@@ -18,7 +18,7 @@ export function Contact() {
       </p>
 
       <a
-        href="mailto:stephen@stephengroenewald.com?subject=Getting%20in%20touch"
+        href="mailto:buildingai.eu@gmail.com?subject=Getting%20in%20touch"
         className="mt-10 -rotate-2 rounded-full px-8 py-4 text-sm font-medium tracking-[0.1em] uppercase transition-transform duration-200 hover:rotate-0 hover:scale-105 active:scale-95 active:skew-x-1"
         style={{
           fontFamily: "var(--font-mono)",
@@ -27,7 +27,7 @@ export function Contact() {
           boxShadow: "0 0 40px rgba(232,121,42,0.35)",
         }}
       >
-        Coming soon
+        Get in touch
       </a>
 
       <div
