@@ -22,7 +22,7 @@ function Index() {
       if (fromHash) {
         setVariant(fromHash);
       } else {
-        window.location.replace("#v1");
+        setVariant("v1");
       }
     };
     apply();

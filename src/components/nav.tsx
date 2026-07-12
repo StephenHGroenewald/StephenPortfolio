@@ -2,12 +2,19 @@ export function Nav() {
   return (
     <div className="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-5 md:px-10">
       <a
-        href="/#v1"
+        href="/"
         onClick={(e) => {
           if (typeof window !== "undefined" && window.location.pathname === "/") {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: "instant" });
-            window.location.hash = "#v1";
+            if (window.location.hash) {
+              window.history.replaceState(
+                null,
+                "",
+                window.location.pathname + window.location.search,
+              );
+              window.dispatchEvent(new HashChangeEvent("hashchange"));
+            }
           }
         }}
         className="flex items-center gap-2"
