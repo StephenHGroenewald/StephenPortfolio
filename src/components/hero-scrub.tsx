@@ -161,7 +161,9 @@ export function HeroScrub({ variant = "v2" }: { variant?: HeroVariant }) {
       scrollTrigger: {
         trigger: nextSection || container,
         start: nextSection ? "top bottom" : () => `top+=${scrollDistance} top`,
-        end: nextSection ? "top center" : () => `top+=${scrollDistance + window.innerHeight * 0.8} top`,
+        end: nextSection
+          ? "top center"
+          : () => `top+=${scrollDistance + window.innerHeight * 0.8} top`,
         scrub: true,
         invalidateOnRefresh: true,
       },
@@ -199,7 +201,10 @@ export function HeroScrub({ variant = "v2" }: { variant?: HeroVariant }) {
         }}
       />
 
-      <div ref={chromeRef} className="relative z-10 flex h-full min-h-dvh flex-col justify-end px-6 pb-20 md:px-10 md:pb-28">
+      <div
+        ref={chromeRef}
+        className="relative z-10 flex h-full min-h-dvh flex-col justify-end px-6 pb-20 md:px-10 md:pb-28"
+      >
         <span ref={frameTagRef} className="hidden" aria-hidden="true" />
 
         <h1
@@ -214,8 +219,8 @@ export function HeroScrub({ variant = "v2" }: { variant?: HeroVariant }) {
           className="mt-4 max-w-md text-base md:text-lg"
           style={{ color: "var(--brand-ink-dim)" }}
         >
-          GTM enablement and partnerships leader. 25+ years bridging technical
-          architecture and commercial strategy in global FinTech.
+          GTM enablement and partnerships leader. 25+ years bridging technical architecture and
+          commercial strategy, including 16 years in global FinTech.
         </p>
       </div>
     </section>

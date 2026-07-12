@@ -87,9 +87,13 @@ export function Contact() {
 
       <div
         className="mt-24 w-full max-w-4xl border-t pt-6 text-center text-[11px] tracking-[0.15em] uppercase"
-        style={{ borderColor: "var(--brand-hairline)", fontFamily: "var(--font-mono)", color: "var(--brand-ink-dim)" }}
+        style={{
+          borderColor: "var(--brand-hairline)",
+          fontFamily: "var(--font-mono)",
+          color: "var(--brand-ink-dim)",
+        }}
       >
-        <span>© 2026 Stephen Groenewald • v1.0.4</span>
+        <span>© 2026 Stephen Groenewald • v1.0.5</span>
       </div>
     </footer>
   );
