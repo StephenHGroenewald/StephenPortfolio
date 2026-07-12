@@ -20,7 +20,7 @@ export function Nav() {
           Creative Architect
         </span>
       </a>
-      <a href="mailto:buildingai.eu@gmail.com?subject=Getting%20in%20touch" className="group relative text-xs tracking-[0.15em] uppercase">
+      <a href="#contact" className="group relative text-xs tracking-[0.15em] uppercase">
         <span
           aria-hidden="true"
           className="mr-1 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
